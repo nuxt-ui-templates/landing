@@ -17,7 +17,7 @@
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.5.1",
     "better-sqlite3": "^12.6.2",
-    "nuxt": "^4.3.1",
+    "nuxt": "^4.4.2",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {

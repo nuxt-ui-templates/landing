@@ -5,24 +5,18 @@ import type { VariantType } from 'motion-v'
 const nuxtApp = useNuxtApp()
 const activeSection = ref<string>()
 
-function scrollTo(id: string) {
-  document.querySelector(`#${id}`)?.scrollIntoView({ behavior: 'smooth' })
-}
-
 const items = computed(() => [
   {
     label: 'Features',
     to: '#features',
     exactHash: true,
-    active: activeSection.value === 'features',
-    onSelect: () => scrollTo('features')
+    active: activeSection.value === 'features'
   },
   {
     label: 'Metrics',
     to: '#metrics',
     exactHash: true,
-    active: activeSection.value === 'metrics',
-    onSelect: () => scrollTo('metrics')
+    active: activeSection.value === 'metrics'
   }
 ])
 

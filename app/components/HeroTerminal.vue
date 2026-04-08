@@ -34,7 +34,7 @@ function lineMotion(index: number) {
 <template>
   <Motion
     as="div"
-    class="mx-auto w-full max-w-[720px] px-4 sm:px-6"
+    class="mx-auto w-full max-w-2xl"
     :initial="{ opacity: 0, y: 16 }"
     :animate="{ opacity: 1, y: 0 }"
     :transition="{ duration: 1, delay: 0.85 }"

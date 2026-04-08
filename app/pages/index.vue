@@ -37,23 +37,28 @@ function scrollMotion(delay = 0) {
   }
 }
 
-function gridBorders(index: number, total: number) {
+function gridBorders(index: number, total: number, cols: [number, number, number] = [1, 2, 3]) {
   const classes = []
+  const prefixes = ['', 'sm:', 'lg:']
 
-  const lastRow1 = total - 1
-  const lastRow2 = total - (total % 2 === 0 ? 2 : 1)
-  const lastRow3 = total - (total % 3 === 0 ? 3 : total % 3)
+  for (let i = 0; i < cols.length; i++) {
+    const c = cols[i]!
+    const prefix = prefixes[i]!
+    const lastRowStart = total - (total % c === 0 ? c : total % c)
+    const isLastCol = (index + 1) % c === 0
 
-  if (index < lastRow1) classes.push('border-b')
-  if (index >= lastRow2 && index < lastRow1) classes.push('sm:border-b-0')
-  if (index >= lastRow3 && index < lastRow2) classes.push('lg:border-b-0')
+    if (index < lastRowStart) {
+      classes.push(`${prefix}border-b`)
+    } else if (i > 0) {
+      classes.push(`${prefix}border-b-0`)
+    }
 
-  const rightCol2 = index % 2 !== 0
-  const rightCol3 = (index + 1) % 3 === 0
-
-  if (!rightCol2) classes.push('sm:border-r')
-  if (rightCol2 && !rightCol3) classes.push('lg:border-r')
-  if (!rightCol2 && rightCol3) classes.push('lg:border-r-0')
+    if (!isLastCol) {
+      classes.push(`${prefix}border-r`)
+    } else if (i > 0) {
+      classes.push(`${prefix}border-r-0`)
+    }
+  }
 
   return classes
 }
@@ -65,7 +70,7 @@ function copyCommand() {
   if (page.value?.cta?.command) {
     copied.value = true
     navigator.clipboard.writeText(page.value.cta.command)
-    toast.add({ title: 'Copied!', description: 'Command copied to clipboard.' })
+    toast.add({ title: 'Copied to clipboard!', icon: 'i-lucide-circle-check' })
     setTimeout(() => {
       copied.value = false
     }, 2000)
@@ -141,9 +146,7 @@ function copyCommand() {
         </Motion>
       </template>
 
-      <template #bottom>
-        <HeroTerminal :lines="page.terminal.lines" />
-      </template>
+      <HeroTerminal :lines="page.terminal.lines" />
     </UPageHero>
 
     <!-- Features -->
@@ -184,7 +187,7 @@ function copyCommand() {
         </Motion>
       </template>
 
-      <div class="rounded-2xl border border-default bg-default">
+      <div class="rounded-2xl border border-default bg-default overflow-hidden">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <Motion
             v-for="(feature, index) in page.features.items"
@@ -215,12 +218,12 @@ function copyCommand() {
     <!-- Metrics -->
     <UPageSection
       id="metrics"
-      orientation="horizontal"
       :ui="{
         root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
         container: 'max-w-5xl',
-        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
-        description: 'max-w-md text-sm leading-relaxed text-dimmed'
+        headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
+        title: 'max-w-lg mx-auto',
+        description: 'max-w-md mx-auto text-sm leading-relaxed text-dimmed'
       }"
     >
       <template #headline>
@@ -256,22 +259,19 @@ function copyCommand() {
         v-bind="scrollMotion(0.15)"
         :in-view-options="{ once: true, amount: 0.2 }"
       >
-        <div class="grid grid-cols-2">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4">
           <UPageCard
             v-for="(metric, index) in page.metrics.items"
             :key="metric.label"
             :title="metric.value"
             :description="metric.label"
             variant="naked"
-            class="p-8 text-center transition-colors duration-300 hover:bg-elevated/50 rounded-none cursor-default"
-            :class="[
-              index < 2 ? 'border-b border-default' : '',
-              index % 2 === 0 ? 'border-r border-default' : ''
-            ]"
+            class="px-6 py-10 sm:py-12 text-center transition-colors duration-300 hover:bg-elevated/50 rounded-none cursor-default border-default"
+            :class="gridBorders(index, page.metrics.items.length, [1, 2, 4])"
             :ui="{
               wrapper: 'items-center',
-              title: `text-4xl font-bold tracking-tight leading-none ${metric.class}`,
-              description: 'font-mono text-xs uppercase tracking-[0.06em] text-dimmed'
+              title: `text-4xl sm:text-5xl font-bold tracking-tight leading-none ${metric.class}`,
+              description: 'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3'
             }"
           />
         </div>

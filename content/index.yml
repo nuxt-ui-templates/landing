@@ -9,10 +9,12 @@ hero:
     - label: Start for free
       color: primary
       size: xl
+      to: '#'
     - label: View demo
       size: xl
       color: neutral
       variant: soft
+      to: '#'
 terminal:
   lines:
     - segments:
@@ -56,6 +58,14 @@ terminal:
           style: success
         - text: "https://app.example.com/acme-corp"
           style: url
+logos:
+  title: Trusted by engineering teams at
+  icons:
+    - i-simple-icons-google
+    - i-simple-icons-github
+    - i-simple-icons-netflix
+    - i-simple-icons-vercel
+    - i-simple-icons-stripe
 features:
   headline: Capabilities
   title: "Every signal, one surface."
@@ -103,3 +113,4 @@ cta:
   links:
     - label: Start for free
       color: primary
+      to: '#'

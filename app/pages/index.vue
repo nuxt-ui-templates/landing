@@ -37,35 +37,19 @@ function scrollMotion(delay = 0) {
   }
 }
 
-function gridBorders(index: number, total: number, cols: [number, number, number] = [1, 2, 3]) {
-  const classes = []
-  const prefixes = ['', 'sm:', 'lg:']
-
-  for (let i = 0; i < cols.length; i++) {
-    const c = cols[i]!
-    const prefix = prefixes[i]!
-    const lastRowStart = total - (total % c === 0 ? c : total % c)
-    const isLastCol = (index + 1) % c === 0
-
-    if (index < lastRowStart) {
-      classes.push(`${prefix}border-b`)
-    } else if (i > 0) {
-      classes.push(`${prefix}border-b-0`)
-    }
-
-    if (!isLastCol) {
-      classes.push(`${prefix}border-r`)
-    } else if (i > 0) {
-      classes.push(`${prefix}border-r-0`)
-    }
+function cardMotion(index: number) {
+  return {
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
+    inViewOptions: { once: true, amount: 0.2 },
+    transition: { duration: 0.5, delay: index * 0.08 }
   }
-
-  return classes
 }
 
 const toast = useToast()
 
 const copied = ref(false)
+
 function copyCommand() {
   if (page.value?.cta?.command) {
     copied.value = true
@@ -96,10 +80,7 @@ function copyCommand() {
       </template>
 
       <template #headline>
-        <Motion
-          as="div"
-          v-bind="heroMotion(0.2)"
-        >
+        <Motion v-bind="heroMotion(0.2)">
           <div class="inline-flex items-center gap-2 rounded-full border border-default bg-elevated px-3.5 py-1.5 text-xs font-medium text-muted">
             <span class="size-1.5 rounded-full bg-primary animate-pulse" />
             {{ page.hero.headline }}
@@ -116,7 +97,7 @@ function copyCommand() {
           <br v-if="heroTitle.secondary">
           <span
             v-if="heroTitle.secondary"
-            class="bg-linear-to-br from-primary-500 via-primary-300 to-primary-200 bg-clip-text text-transparent"
+            class="bg-linear-to-br from-primary-400 via-primary-300 to-primary-200 bg-clip-text text-transparent"
           >
             {{ heroTitle.secondary }}
           </span>
@@ -134,7 +115,6 @@ function copyCommand() {
 
       <template #links>
         <Motion
-          as="div"
           class="flex justify-center gap-6"
           v-bind="heroMotion(0.65)"
         >
@@ -146,7 +126,32 @@ function copyCommand() {
         </Motion>
       </template>
 
-      <HeroTerminal :lines="page.terminal.lines" />
+      <div class="w-full max-w-2xl mx-auto">
+        <Motion
+          as-child
+          v-bind="heroMotion(0.85)"
+        >
+          <HeroTerminal :lines="page.terminal.lines" />
+        </Motion>
+
+        <Motion
+          class="flex flex-col items-center gap-6 mt-12"
+          v-bind="heroMotion(1)"
+        >
+          <p class="font-mono font-medium text-xs text-dimmed/50 uppercase tracking-[0.12em] text-center">
+            {{ page.logos.title }}
+          </p>
+
+          <div class="flex items-center gap-8">
+            <UIcon
+              v-for="(icon, index) in page.logos.icons"
+              :key="index"
+              :name="icon"
+              class="size-6 shrink-0 text-dimmed/50 hover:text-primary transition-all duration-300 hover:scale-110"
+            />
+          </div>
+        </Motion>
+      </div>
     </UPageHero>
 
     <!-- Features -->
@@ -188,22 +193,19 @@ function copyCommand() {
       </template>
 
       <div class="rounded-2xl border border-default bg-default overflow-hidden">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px">
           <Motion
             v-for="(feature, index) in page.features.items"
             :key="feature.title"
-            as="div"
-            v-bind="scrollMotion()"
-            :in-view-options="{ once: true, amount: 0.2 }"
-            :transition="{ duration: 0.5, delay: index * 0.08 }"
+            v-bind="cardMotion(index)"
+            as-child
           >
             <UPageCard
               :icon="feature.icon"
               :title="feature.title"
               :description="feature.description"
-              variant="naked"
-              class="border-default p-8 sm:p-9 transition-colors duration-300 hover:bg-elevated/50 rounded-none cursor-default"
-              :class="gridBorders(index, page.features.items.length)"
+              class="rounded-none duration-300"
+              to="#"
               :ui="{
                 leading: 'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
                 title: 'text-sm tracking-tight',
@@ -223,7 +225,7 @@ function copyCommand() {
         container: 'max-w-5xl',
         headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
-        description: 'max-w-md mx-auto text-sm leading-relaxed text-dimmed'
+        description: 'max-w-md mx-auto text-dimmed'
       }"
     >
       <template #headline>
@@ -253,29 +255,29 @@ function copyCommand() {
         </Motion>
       </template>
 
-      <Motion
-        as="div"
-        class="overflow-hidden rounded-2xl border border-default bg-default"
-        v-bind="scrollMotion(0.15)"
-        :in-view-options="{ once: true, amount: 0.2 }"
-      >
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4">
-          <UPageCard
+      <div class="rounded-2xl border border-default bg-default overflow-hidden">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px">
+          <Motion
             v-for="(metric, index) in page.metrics.items"
             :key="metric.label"
-            :title="metric.value"
-            :description="metric.label"
-            variant="naked"
-            class="px-6 py-10 sm:py-12 text-center transition-colors duration-300 hover:bg-elevated/50 rounded-none cursor-default border-default"
-            :class="gridBorders(index, page.metrics.items.length, [1, 2, 4])"
-            :ui="{
-              wrapper: 'items-center',
-              title: `text-4xl sm:text-5xl font-bold tracking-tight leading-none ${metric.class}`,
-              description: 'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3'
-            }"
-          />
+            v-bind="cardMotion(index)"
+            as-child
+          >
+            <UPageCard
+              :title="metric.value"
+              :description="metric.label"
+              class="rounded-none duration-300"
+              to="#"
+              :ui="{
+                root: 'text-center',
+                wrapper: 'items-center',
+                title: ['text-4xl font-bold tracking-tight leading-none', metric.class],
+                description: 'font-mono text-xs uppercase tracking-[0.06em] text-dimmed mt-3'
+              }"
+            />
+          </Motion>
         </div>
-      </Motion>
+      </div>
     </UPageSection>
 
     <!-- CTA -->
@@ -312,7 +314,6 @@ function copyCommand() {
 
       <template #links>
         <Motion
-          as="div"
           class="flex flex-col items-center justify-center gap-6"
           v-bind="scrollMotion(0.2)"
         >

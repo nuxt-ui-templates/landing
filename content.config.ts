@@ -31,6 +31,10 @@ export const collections = {
           }))
         }))
       }),
+      logos: z.object({
+        title: z.string().nonempty(),
+        icons: z.array(z.string())
+      }),
       features: z.object({
         headline: z.string().optional(),
         title: z.string().nonempty(),

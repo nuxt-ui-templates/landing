@@ -2,25 +2,23 @@
 const nuxtApp = useNuxtApp()
 const { activeHeadings, updateHeadings } = useScrollspy()
 
-const items = computed(() => [{
-  label: 'Features',
-  to: '#features',
-  active: activeHeadings.value.includes('features') && !activeHeadings.value.includes('pricing')
-}, {
-  label: 'Pricing',
-  to: '#pricing',
-  active: activeHeadings.value.includes('pricing')
-}, {
-  label: 'Testimonials',
-  to: '#testimonials',
-  active: activeHeadings.value.includes('testimonials') && !activeHeadings.value.includes('pricing')
-}])
+const items = computed(() => [
+  {
+    label: 'Features',
+    to: '#features',
+    active: activeHeadings.value.includes('features') && !activeHeadings.value.includes('metrics')
+  },
+  {
+    label: 'Performance',
+    to: '#metrics',
+    active: activeHeadings.value.includes('metrics')
+  }
+])
 
 nuxtApp.hooks.hookOnce('page:finish', () => {
   updateHeadings([
     document.querySelector('#features'),
-    document.querySelector('#pricing'),
-    document.querySelector('#testimonials')
+    document.querySelector('#metrics')
   ].filter(Boolean) as Element[])
 })
 </script>
@@ -29,40 +27,49 @@ nuxtApp.hooks.hookOnce('page:finish', () => {
   <UHeader>
     <template #left>
       <NuxtLink to="/">
-        <AppLogo class="w-auto h-6 shrink-0" />
+        <AppLogo class="h-6 w-auto shrink-0" />
       </NuxtLink>
 
       <TemplateMenu />
     </template>
 
+    <UNavigationMenu
+      :items="items"
+      variant="link"
+    />
+
     <template #right>
-      <UNavigationMenu
-        :items="items"
-        variant="link"
-        class="hidden lg:block"
-      />
-
       <UButton
-        label="Download App"
-        variant="subtle"
-        class="hidden lg:block"
+        label="Sign in"
+        color="neutral"
+        variant="ghost"
+        class="hidden lg:flex"
       />
-
-      <UColorModeButton />
+      <UButton
+        label="Get started"
+        color="neutral"
+        class="hidden lg:flex"
+      />
     </template>
 
     <template #body>
       <UNavigationMenu
         :items="items"
         orientation="vertical"
-        class="-mx-2.5"
       />
-      <UButton
-        class="mt-4"
-        label="Download App"
-        variant="subtle"
-        block
-      />
+
+      <div class="mt-4 flex flex-col gap-2">
+        <UButton
+          label="Sign in"
+          color="neutral"
+          variant="soft"
+          block
+        />
+        <UButton
+          label="Get started"
+          block
+        />
+      </div>
     </template>
   </UHeader>
 </template>

@@ -3,6 +3,27 @@
 
 @source "../../../content/**/*";
 
-@theme {
-  --font-sans: 'Public Sans', sans-serif;
+@theme static {
+  --font-sans: 'Instrument Sans', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --color-lime-50: #fbfde8;
+  --color-lime-100: #f5fbb3;
+  --color-lime-200: #eef87e;
+  --color-lime-300: #ddf34c;
+  --color-lime-400: #c8f031;
+  --color-lime-500: #a9d316;
+  --color-lime-600: #84a70e;
+  --color-lime-700: #647f11;
+  --color-lime-800: #4f6413;
+  --color-lime-900: #435514;
+  --color-lime-950: #232f06;
+}
+
+.dark {
+  --ui-bg: var(--ui-color-neutral-950);
+  --ui-bg-muted: var(--ui-color-neutral-900);
+  --ui-bg-elevated: var(--ui-color-neutral-900);
+  --ui-bg-accented: var(--ui-color-neutral-800);
+  --ui-border: var(--ui-color-neutral-900);
 }

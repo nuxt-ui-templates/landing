@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
-
 const { data: page } = await useAsyncData('index', () => queryCollection('content').first())
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })

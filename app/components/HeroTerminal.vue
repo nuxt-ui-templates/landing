@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
-
 interface TerminalSegment {
   text: string
   style: string

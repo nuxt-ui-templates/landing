@@ -78,7 +78,7 @@ function copyCommand() {
     <!-- Hero -->
     <UPageHero
       :ui="{
-        root: 'overflow-hidden',
+        root: 'overflow-hidden pb-24 sm:pb-32',
         container: 'relative z-10 lg:py-32',
         wrapper: 'flex flex-col items-center',
         title: 'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
@@ -130,7 +130,7 @@ function copyCommand() {
       <template #links>
         <Motion
           as="div"
-          class="flex justify-center gap-3"
+          class="flex justify-center gap-6"
           v-bind="heroMotion(0.65)"
         >
           <UButton
@@ -150,7 +150,7 @@ function copyCommand() {
     <UPageSection
       id="features"
       :ui="{
-        root: 'py-24 sm:py-32',
+        root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
         container: 'max-w-5xl',
         headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em] text-center',
         title: 'max-w-lg mx-auto',
@@ -217,7 +217,7 @@ function copyCommand() {
       id="metrics"
       orientation="horizontal"
       :ui="{
-        root: 'py-24 sm:py-32',
+        root: 'py-24 sm:py-32 scroll-mt-(--ui-header-height)',
         container: 'max-w-5xl',
         headline: 'font-mono font-medium text-xs text-primary uppercase tracking-[0.12em]',
         description: 'max-w-md text-sm leading-relaxed text-dimmed'

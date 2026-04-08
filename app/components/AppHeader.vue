@@ -3,26 +3,40 @@ import { motion } from 'motion-v'
 import type { VariantType } from 'motion-v'
 
 const nuxtApp = useNuxtApp()
-const { activeHeadings, updateHeadings } = useScrollspy()
+const activeSection = ref<string>()
+
+function scrollTo(id: string) {
+  document.querySelector(`#${id}`)?.scrollIntoView({ behavior: 'smooth' })
+}
 
 const items = computed(() => [
   {
     label: 'Features',
     to: '#features',
-    active: activeHeadings.value.includes('features') && !activeHeadings.value.includes('metrics')
+    exactHash: true,
+    active: activeSection.value === 'features',
+    onSelect: () => scrollTo('features')
   },
   {
-    label: 'Performance',
+    label: 'Metrics',
     to: '#metrics',
-    active: activeHeadings.value.includes('metrics')
+    exactHash: true,
+    active: activeSection.value === 'metrics',
+    onSelect: () => scrollTo('metrics')
   }
 ])
 
-nuxtApp.hooks.hookOnce('page:finish', () => {
-  updateHeadings([
-    document.querySelector('#features'),
-    document.querySelector('#metrics')
-  ].filter(Boolean) as Element[])
+nuxtApp.hooks.hookOnce('page:loading:end', () => {
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries.find(e => e.isIntersecting)
+    if (visible) {
+      activeSection.value = visible.target.id
+    } else if (entries.every(e => !e.isIntersecting)) {
+      activeSection.value = undefined
+    }
+  }, { rootMargin: '-50% 0px -50% 0px' })
+
+  document.querySelectorAll('#features, #metrics').forEach(el => observer.observe(el))
 })
 
 const variants: Record<string, VariantType | ((custom: unknown) => VariantType)> = {

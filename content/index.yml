@@ -7,14 +7,12 @@ hero:
   headline: "v2.0 — Now with predictive alerting"
   links:
     - label: Start for free
-      to: '#features'
       color: primary
       size: xl
     - label: View demo
-      to: '#features'
       size: xl
       color: neutral
-      variant: outline
+      variant: soft
 terminal:
   lines:
     - segments:
@@ -104,5 +102,4 @@ cta:
   command: npx telemetry init
   links:
     - label: Start for free
-      to: '#features'
       color: primary

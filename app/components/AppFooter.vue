@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const links = [
-  { label: 'Docs', to: '#' },
-  { label: 'GitHub', to: '#' },
-  { label: 'Twitter', to: '#' },
-  { label: 'Status', to: '#' },
-  { label: 'Privacy', to: '#' }
+  { label: 'Docs', to: 'https://ui.nuxt.com', target: '_blank' },
+  { label: 'GitHub', to: 'https://github.com/nuxt/ui', target: '_blank' },
+  { label: 'Twitter', to: 'https://twitter.com/nuxt_js', target: '_blank' },
+  { label: 'Status' },
+  { label: 'Privacy' }
 ]
 </script>
 

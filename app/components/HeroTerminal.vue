@@ -41,7 +41,7 @@ function lineMotion(index: number) {
     :animate="{ opacity: 1, y: 0 }"
     :transition="{ duration: 1, delay: 0.85 }"
   >
-    <div class="overflow-hidden rounded-xl border border-default bg-elevated/50 shadow-2xl shadow-black/50 ring-1 ring-white/2">
+    <div class="overflow-hidden rounded-xl border border-default bg-elevated/50 ring-1 ring-white/2">
       <div class="flex items-center gap-1.5 border-b border-default p-4 sm:px-6">
         <span class="size-2.5 rounded-full border border-default bg-muted" />
         <span class="size-2.5 rounded-full border border-default bg-muted" />

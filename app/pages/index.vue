@@ -32,19 +32,45 @@ function heroMotion(delay: number) {
 
 function scrollMotion(delay = 0) {
   return {
-    'initial': { opacity: 0, y: 16 },
-    'while-in-view': { opacity: 1, y: 0 },
-    'viewport': { once: true, amount: 0.5 },
-    'transition': { duration: 0.6, delay }
+    initial: { opacity: 0, y: 16 },
+    whileInView: { opacity: 1, y: 0 },
+    inViewOptions: { once: true, amount: 0.5 },
+    transition: { duration: 0.6, delay }
   }
+}
+
+function gridBorders(index: number, total: number) {
+  const classes = []
+
+  const lastRow1 = total - 1
+  const lastRow2 = total - (total % 2 === 0 ? 2 : 1)
+  const lastRow3 = total - (total % 3 === 0 ? 3 : total % 3)
+
+  if (index < lastRow1) classes.push('border-b')
+  if (index >= lastRow2 && index < lastRow1) classes.push('sm:border-b-0')
+  if (index >= lastRow3 && index < lastRow2) classes.push('lg:border-b-0')
+
+  const rightCol2 = index % 2 !== 0
+  const rightCol3 = (index + 1) % 3 === 0
+
+  if (!rightCol2) classes.push('sm:border-r')
+  if (rightCol2 && !rightCol3) classes.push('lg:border-r')
+  if (!rightCol2 && rightCol3) classes.push('lg:border-r-0')
+
+  return classes
 }
 
 const toast = useToast()
 
+const copied = ref(false)
 function copyCommand() {
   if (page.value?.cta?.command) {
+    copied.value = true
     navigator.clipboard.writeText(page.value.cta.command)
     toast.add({ title: 'Copied!', description: 'Command copied to clipboard.' })
+    setTimeout(() => {
+      copied.value = false
+    }, 2000)
   }
 }
 </script>
@@ -55,7 +81,7 @@ function copyCommand() {
     <UPageHero
       :ui="{
         root: 'overflow-hidden',
-        container: 'relative z-10',
+        container: 'relative z-10 lg:py-32',
         wrapper: 'flex flex-col items-center',
         title: 'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
         description: 'mt-5 max-w-xl mx-auto text-base sm:text-lg leading-relaxed text-dimmed',
@@ -167,7 +193,7 @@ function copyCommand() {
             :key="feature.title"
             as="div"
             v-bind="scrollMotion()"
-            :viewport="{ once: true, amount: 0.2 }"
+            :in-view-options="{ once: true, amount: 0.2 }"
             :transition="{ duration: 0.5, delay: index * 0.08 }"
           >
             <UPageCard
@@ -176,14 +202,11 @@ function copyCommand() {
               :description="feature.description"
               variant="naked"
               class="border-default p-8 sm:p-9 transition-colors duration-300 hover:bg-elevated/50 rounded-none cursor-default"
-              :class="[
-                index < page.features.items.length - 3 ? 'border-b' : '',
-                (index + 1) % 3 !== 0 ? 'lg:border-r' : ''
-              ]"
+              :class="gridBorders(index, page.features.items.length)"
               :ui="{
                 leading: 'mb-5 flex size-9 justify-center rounded-lg bg-primary/10',
                 title: 'text-sm tracking-tight',
-                description: 'text-sm leading-relaxed line-clamp-3 text-dimmed'
+                description: 'text-sm leading-relaxed sm:line-clamp-2 lg:line-clamp-3 text-dimmed'
               }"
             />
           </Motion>
@@ -233,7 +256,7 @@ function copyCommand() {
         as="div"
         class="overflow-hidden rounded-2xl border border-default bg-default"
         v-bind="scrollMotion(0.15)"
-        :viewport="{ once: true, amount: 0.2 }"
+        :in-view-options="{ once: true, amount: 0.2 }"
       >
         <div class="grid grid-cols-2">
           <UPageCard
@@ -292,24 +315,24 @@ function copyCommand() {
       <template #links>
         <Motion
           as="div"
-          class="flex flex-col gap-3"
+          class="flex flex-col items-center justify-center gap-6"
           v-bind="scrollMotion(0.2)"
         >
           <UButton
             v-for="link in page.cta.links"
             :key="link.label"
             v-bind="link"
-            size="lg"
-            block
+            size="xl"
           />
+
           <UButton
             :label="page.cta.command"
-            icon="i-lucide-copy"
+            :trailing-icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             color="neutral"
-            variant="outline"
-            class="font-mono"
-            size="lg"
-            block
+            variant="subtle"
+            class="font-mono gap-4"
+            size="xl"
+            :ui="{ trailingIcon: 'size-5' }"
             @click="copyCommand"
           />
         </Motion>

@@ -2,9 +2,8 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/image',
-    '@nuxt/ui',
     '@nuxt/content',
+    '@nuxt/ui',
     'motion-v/nuxt'
   ],
 

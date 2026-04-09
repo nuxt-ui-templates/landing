@@ -28,11 +28,11 @@ function heroMotion(delay: number) {
   }
 }
 
-function scrollMotion(delay = 0) {
+function scrollMotion(delay = 0, amount = 0.5) {
   return {
     initial: { opacity: 0, y: 16 },
     whileInView: { opacity: 1, y: 0 },
-    inViewOptions: { once: true, amount: 0.5 },
+    inViewOptions: { once: true, amount },
     transition: { duration: 0.6, delay }
   }
 }
@@ -41,8 +41,8 @@ function cardMotion(index: number) {
   return {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 },
-    inViewOptions: { once: true, amount: 0.2 },
-    transition: { duration: 0.5, delay: index * 0.08 }
+    inViewOptions: { once: true, amount: 0.5 },
+    transition: { duration: 0.6, delay: index * 0.08 }
   }
 }
 
@@ -126,32 +126,27 @@ function copyCommand() {
         </Motion>
       </template>
 
-      <div class="w-full max-w-2xl mx-auto">
-        <Motion
-          as-child
-          v-bind="heroMotion(0.85)"
-        >
-          <HeroTerminal :lines="page.terminal.lines" />
-        </Motion>
+      <Motion
+        as-child
+        v-bind="heroMotion(0.85)"
+        class="max-w-2xl mx-auto w-full"
+      >
+        <HeroTerminal :lines="page.terminal.lines" />
+      </Motion>
 
-        <Motion
-          class="flex flex-col items-center gap-6 mt-12"
-          v-bind="heroMotion(1)"
-        >
-          <p class="font-mono font-medium text-xs text-dimmed/50 uppercase tracking-[0.12em] text-center">
-            {{ page.logos.title }}
-          </p>
-
-          <div class="flex items-center gap-8">
-            <UIcon
-              v-for="(icon, index) in page.logos.icons"
-              :key="index"
-              :name="icon"
-              class="size-6 shrink-0 text-dimmed/50 hover:text-primary transition-all duration-300 hover:scale-110"
-            />
-          </div>
-        </Motion>
-      </div>
+      <Motion
+        class="max-w-lg mx-auto w-full"
+        v-bind="scrollMotion(1.6, 1)"
+      >
+        <UPageLogos
+          :title="page.logos.title"
+          :items="page.logos.items"
+          :ui="{
+            title: 'font-mono uppercase text-xs tracking-[0.12em] text-dimmed',
+            logo: 'text-muted size-6'
+          }"
+        />
+      </Motion>
     </UPageHero>
 
     <!-- Features -->
@@ -198,7 +193,6 @@ function copyCommand() {
             v-for="(feature, index) in page.features.items"
             :key="feature.title"
             v-bind="cardMotion(index)"
-            as-child
           >
             <UPageCard
               :icon="feature.icon"
@@ -261,7 +255,6 @@ function copyCommand() {
             v-for="(metric, index) in page.metrics.items"
             :key="metric.label"
             v-bind="cardMotion(index)"
-            as-child
           >
             <UPageCard
               :title="metric.value"
@@ -329,7 +322,7 @@ function copyCommand() {
             :trailing-icon="copied ? 'i-lucide-copy-check' : 'i-lucide-copy'"
             color="neutral"
             variant="subtle"
-            class="font-mono gap-4"
+            class="font-mono font-light text-toned gap-4"
             size="xl"
             :ui="{ trailingIcon: 'size-5' }"
             @click="copyCommand"

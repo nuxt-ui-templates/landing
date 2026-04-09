@@ -60,11 +60,11 @@ terminal:
           style: url
 logos:
   title: Trusted by engineering teams at
-  icons:
-    - i-simple-icons-google
-    - i-simple-icons-github
-    - i-simple-icons-netflix
+  items:
     - i-simple-icons-vercel
+    - i-simple-icons-github
+    - i-simple-icons-linear
+    - i-simple-icons-supabase
     - i-simple-icons-stripe
 features:
   headline: Capabilities

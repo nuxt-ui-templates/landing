@@ -29,6 +29,9 @@ importers:
       nuxt:
         specifier: ^4.4.2
         version: 4.4.2(@babel/core@7.29.0)(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0))(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@parcel/watcher@2.5.6)(@vue/compiler-sfc@3.5.31)(better-sqlite3@12.8.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.8.0))(eslint@10.2.0(jiti@2.6.1))(ioredis@5.10.1)(lightningcss@1.32.0)(magicast@0.5.2)(optionator@0.9.4)(rollup-plugin-visualizer@7.0.1(rollup@4.60.1))(rollup@4.60.1)(terser@5.46.1)(typescript@6.0.2)(vite@7.3.1(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(vue-tsc@3.2.6(typescript@6.0.2))(yaml@2.8.3)
+      shaders:
+        specifier: ^2.5.92
+        version: 2.5.92(vue@3.5.31(typescript@6.0.2))
       tailwindcss:
         specifier: ^4.2.2
         version: 4.2.2
@@ -4944,6 +4947,29 @@ packages:
     engines: {node: '>= 0.10'}
     hasBin: true
 
+  shaders@2.5.92:
+    resolution: {integrity: sha512-vCCFNjGcJRVMKI2oBqbDEEHvi8kUv05sjtjAtNlGQI7dq78M121Q7DJi7ZkYIMLF8+702TYvWdMUuvjdILiovw==}
+    peerDependencies:
+      pixi.js: ^8.0.0
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+      solid-js: ^1.8.0
+      svelte: ^5
+      vue: ^3.5.0
+    peerDependenciesMeta:
+      pixi.js:
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      solid-js:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+
   shebang-command@2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}
     engines: {node: '>=8'}
@@ -5177,6 +5203,9 @@ packages:
 
   text-decoder@1.2.7:
     resolution: {integrity: sha512-vlLytXkeP4xvEq2otHeJfSQIRyWxo/oZGEbXrtEEF9Hnmrdly59sUbzZ/QgyWuLYHctCHxFF4tRQZNQ9k60ExQ==}
+
+  three@0.183.2:
+    resolution: {integrity: sha512-di3BsL2FEQ1PA7Hcvn4fyJOlxRRgFYBpMTcyOgkwJIaDOdJMebEFPA+t98EvjuljDx4hNulAGwF6KIjtwI5jgQ==}
 
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
@@ -11611,6 +11640,12 @@ snapshots:
       safe-buffer: 5.2.1
       to-buffer: 1.2.2
 
+  shaders@2.5.92(vue@3.5.31(typescript@6.0.2)):
+    dependencies:
+      three: 0.183.2
+    optionalDependencies:
+      vue: 3.5.31(typescript@6.0.2)
+
   shebang-command@2.0.0:
     dependencies:
       shebang-regex: 3.0.0
@@ -11878,6 +11913,8 @@ snapshots:
       b4a: 1.8.0
     transitivePeerDependencies:
       - react-native-b4a
+
+  three@0.183.2: {}
 
   tiny-inflate@1.0.3: {}
 

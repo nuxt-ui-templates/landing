@@ -67,24 +67,38 @@ function copyCommand() {
     <!-- Hero -->
     <UPageHero
       :ui="{
-        root: 'overflow-hidden pb-24 sm:pb-32',
+        root: 'pb-24 sm:pb-32',
         container: 'relative z-10 lg:py-32',
         wrapper: 'flex flex-col items-center',
         title: 'sm:text-6xl lg:text-7xl xl:text-[80px] tracking-tighter leading-[1.05]',
-        description: 'mt-5 max-w-xl mx-auto text-base sm:text-lg leading-relaxed text-dimmed',
+        description: 'mt-5 max-w-xl mx-auto text-base sm:text-lg leading-relaxed',
         links: 'gap-3'
       }"
     >
       <template #top>
+        <Motion v-bind="cardMotion(0)">
+          <HeroShaders class="absolute top-0 inset-x-0 opacity-15 h-full" />
+        </Motion>
+
         <GradientGlow class="top-0 w-[800px] h-[600px]" />
       </template>
 
       <template #headline>
         <Motion v-bind="heroMotion(0.2)">
-          <div class="inline-flex items-center gap-2 rounded-full border border-default bg-elevated px-3.5 py-1.5 text-xs font-medium text-muted">
-            <span class="size-1.5 rounded-full bg-primary animate-pulse" />
-            {{ page.hero.headline }}
-          </div>
+          <UBadge
+            color="neutral"
+            variant="soft"
+            :label="page.hero.headline"
+            class="rounded-full px-3 py-1.5"
+          >
+            <template #leading>
+              <UChip
+                inset
+                standalone
+                class="animate-pulse"
+              />
+            </template>
+          </UBadge>
         </Motion>
       </template>
 
@@ -136,7 +150,7 @@ function copyCommand() {
 
       <Motion
         class="max-w-lg mx-auto w-full"
-        v-bind="scrollMotion(1.6, 1)"
+        v-bind="scrollMotion(1.6, 0.75)"
       >
         <UPageLogos
           :title="page.logos.title"

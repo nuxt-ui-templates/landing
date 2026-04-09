@@ -18,6 +18,7 @@
     "better-sqlite3": "^12.8.0",
     "motion-v": "^2.2.0",
     "nuxt": "^4.4.2",
+    "shaders": "^2.5.92",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {

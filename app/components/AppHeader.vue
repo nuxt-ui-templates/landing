@@ -92,6 +92,8 @@ const variants: Record<string, VariantType | ((custom: unknown) => VariantType)>
         variant="ghost"
         color="neutral"
         square
+        :aria-label="open ? 'Close navigation' : 'Open navigation'"
+        :aria-expanded="open"
         :class="ui.toggle({ toggleSide: 'right' })"
         @click="toggle"
       >

@@ -4,11 +4,14 @@ if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
+const title = page.value?.seo?.title || page.value?.title
+const description = page.value?.seo?.description || page.value?.description
+
 useSeoMeta({
-  title: page.value.seo?.title || page.value.title,
-  ogTitle: page.value.seo?.title || page.value.title,
-  description: page.value.seo?.description || page.value.description,
-  ogDescription: page.value.seo?.description || page.value.description
+  title,
+  ogTitle: title,
+  description,
+  ogDescription: description
 })
 
 const heroTitle = computed(() => {
@@ -20,46 +23,33 @@ const heroTitle = computed(() => {
   }
 })
 
-function heroMotion(delay: number) {
+function enterMotion(delay: number = 0) {
   return {
     initial: { opacity: 0, y: 16 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, delay }
-  }
-}
-
-function scrollMotion(delay = 0, amount = 0.5) {
-  return {
-    initial: { opacity: 0, y: 16 },
-    whileInView: { opacity: 1, y: 0 },
-    inViewOptions: { once: true, amount },
     transition: { duration: 0.6, delay }
   }
 }
 
-function cardMotion(index: number) {
+function scrollMotion(delay: number = 0) {
+  return {
+    initial: { opacity: 0, y: 16 },
+    whileInView: { opacity: 1, y: 0 },
+    inViewOptions: { once: true, amount: 1 },
+    transition: { duration: 0.6, delay }
+  }
+}
+
+function staggerMotion(index: number = 0) {
   return {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 },
-    inViewOptions: { once: true, amount: 0.5 },
+    inViewOptions: { once: true, amount: 1 },
     transition: { duration: 0.6, delay: index * 0.08 }
   }
 }
 
-const toast = useToast()
-
-const copied = ref(false)
-
-function copyCommand() {
-  if (page.value?.cta?.command) {
-    copied.value = true
-    navigator.clipboard.writeText(page.value.cta.command)
-    toast.add({ title: 'Copied to clipboard!', icon: 'i-lucide-circle-check' })
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  }
-}
+const { copy, copied } = useClipboard()
 </script>
 
 <template>
@@ -76,7 +66,7 @@ function copyCommand() {
       }"
     >
       <template #top>
-        <Motion v-bind="cardMotion(0)">
+        <Motion v-bind="staggerMotion(0)">
           <HeroShaders class="absolute top-0 inset-x-0 opacity-15 h-full" />
         </Motion>
 
@@ -84,7 +74,7 @@ function copyCommand() {
       </template>
 
       <template #headline>
-        <Motion v-bind="heroMotion(0.2)">
+        <Motion v-bind="enterMotion(0.2)">
           <UBadge
             color="neutral"
             variant="soft"
@@ -105,7 +95,8 @@ function copyCommand() {
       <template #title>
         <Motion
           as="span"
-          v-bind="heroMotion(0.35)"
+          v-bind="enterMotion(0.35)"
+          class="inline-block"
         >
           {{ heroTitle.primary }}
           <br v-if="heroTitle.secondary">
@@ -121,7 +112,8 @@ function copyCommand() {
       <template #description>
         <Motion
           as="span"
-          v-bind="heroMotion(0.5)"
+          v-bind="enterMotion(0.5)"
+          class="inline-block"
         >
           {{ page.description }}
         </Motion>
@@ -130,7 +122,7 @@ function copyCommand() {
       <template #links>
         <Motion
           class="flex justify-center gap-6"
-          v-bind="heroMotion(0.65)"
+          v-bind="enterMotion(0.65)"
         >
           <UButton
             v-for="link in page.hero.links"
@@ -142,7 +134,7 @@ function copyCommand() {
 
       <Motion
         as-child
-        v-bind="heroMotion(0.85)"
+        v-bind="enterMotion(0.85)"
         class="max-w-2xl mx-auto w-full"
       >
         <HeroTerminal :lines="page.terminal.lines" />
@@ -150,7 +142,7 @@ function copyCommand() {
 
       <Motion
         class="max-w-lg mx-auto w-full"
-        v-bind="scrollMotion(1.6, 0.75)"
+        v-bind="scrollMotion(0.95)"
       >
         <UPageLogos
           :title="page.logos.title"
@@ -178,6 +170,7 @@ function copyCommand() {
         <Motion
           as="span"
           v-bind="scrollMotion()"
+          class="inline-block"
         >
           {{ page.features.headline }}
         </Motion>
@@ -187,6 +180,7 @@ function copyCommand() {
         <Motion
           as="span"
           v-bind="scrollMotion(0.1)"
+          class="inline-block"
         >
           {{ page.features.title }}
         </Motion>
@@ -196,6 +190,7 @@ function copyCommand() {
         <Motion
           as="span"
           v-bind="scrollMotion(0.2)"
+          class="inline-block"
         >
           {{ page.features.description }}
         </Motion>
@@ -206,7 +201,7 @@ function copyCommand() {
           <Motion
             v-for="(feature, index) in page.features.items"
             :key="feature.title"
-            v-bind="cardMotion(index)"
+            v-bind="staggerMotion(index)"
           >
             <UPageCard
               :icon="feature.icon"
@@ -240,6 +235,7 @@ function copyCommand() {
         <Motion
           as="span"
           v-bind="scrollMotion()"
+          class="inline-block"
         >
           {{ page.metrics.headline }}
         </Motion>
@@ -249,6 +245,7 @@ function copyCommand() {
         <Motion
           as="span"
           v-bind="scrollMotion(0.1)"
+          class="inline-block"
         >
           {{ page.metrics.title }}
         </Motion>
@@ -258,6 +255,7 @@ function copyCommand() {
         <Motion
           as="span"
           v-bind="scrollMotion(0.2)"
+          class="inline-block"
         >
           {{ page.metrics.description }}
         </Motion>
@@ -268,7 +266,7 @@ function copyCommand() {
           <Motion
             v-for="(metric, index) in page.metrics.items"
             :key="metric.label"
-            v-bind="cardMotion(index)"
+            v-bind="staggerMotion(index)"
           >
             <UPageCard
               :title="metric.value"
@@ -305,6 +303,7 @@ function copyCommand() {
         <Motion
           as="span"
           v-bind="scrollMotion()"
+          class="inline-block"
         >
           {{ page.cta.title }}
         </Motion>
@@ -314,6 +313,7 @@ function copyCommand() {
         <Motion
           as="span"
           v-bind="scrollMotion(0.1)"
+          class="inline-block"
         >
           {{ page.cta.description }}
         </Motion>
@@ -339,7 +339,7 @@ function copyCommand() {
             class="font-mono font-light text-toned gap-4"
             size="xl"
             :ui="{ trailingIcon: 'size-5' }"
-            @click="copyCommand"
+            @click="copy(page.cta.command)"
           />
         </Motion>
       </template>

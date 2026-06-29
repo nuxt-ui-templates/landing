@@ -12,20 +12,20 @@
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.114",
-    "@iconify-json/simple-icons": "^1.2.86",
+    "@iconify-json/simple-icons": "^1.2.87",
     "@nuxt/content": "^3.14.0",
     "@nuxt/ui": "^4.9.0",
     "@vueuse/nuxt": "^14.3.0",
     "motion-v": "^2.3.0",
     "nuxt": "^4.4.8",
-    "shaders": "^2.5.131",
+    "shaders": "^2.5.132",
     "tailwindcss": "^4.3.1"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.16.0",
-    "eslint": "^10.5.0",
+    "eslint": "^10.6.0",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.5"
   },
-  "packageManager": "pnpm@11.8.0"
+  "packageManager": "pnpm@11.9.0"
 }

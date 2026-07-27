@@ -30,8 +30,8 @@ importers:
         specifier: ^4.4.8
         version: 4.4.8(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0(supports-color@10.2.2)))(@babel/plugin-syntax-typescript@7.28.6(@babel/core@7.29.0(supports-color@10.2.2)))(@parcel/watcher@2.5.6)(@vue/compiler-sfc@3.5.35)(cac@6.7.14)(db0@0.3.4)(esbuild@0.28.0)(eslint@10.8.0(jiti@2.7.0)(supports-color@10.2.2))(ioredis@5.10.1(supports-color@10.2.2))(lightningcss@1.32.0)(magicast@0.5.3)(optionator@0.9.4)(rollup-plugin-visualizer@7.0.1(rollup@4.60.4))(rollup@4.60.4)(srvx@0.11.15)(supports-color@10.2.2)(terser@5.47.1)(typescript@6.0.3)(vite@7.3.3(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)(yaml@2.9.0))(vue-tsc@3.3.8(typescript@6.0.3))(yaml@2.9.0)
       shaders:
-        specifier: ^2.5.135
-        version: 2.5.135(vue@3.5.35(typescript@6.0.3))
+        specifier: ^3.0.444
+        version: 3.0.444(vue@3.5.35(typescript@6.0.3))
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -5362,19 +5362,16 @@ packages:
     engines: {node: '>= 0.10'}
     hasBin: true
 
-  shaders@2.5.135:
-    resolution: {integrity: sha512-1Fb68wq9I5yJMkpfeiestXNbb1NT0tgcXIuiQCEUzyTgNR/kVq5mzw25BmK5MTHZGjye6o5O8W9iprjPDHphwg==}
+  shaders@3.0.444:
+    resolution: {integrity: sha512-i/Wg/Gnj3ulb1cqpCLXhrYvgRkn0ncWDH/b9U5sqKfzuz8ygq+AyLWhTv2WBzLi3F8tAU2+88u5zGBOlIiqLyQ==}
     hasBin: true
     peerDependencies:
-      pixi.js: ^8.0.0
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
       solid-js: ^1.8.0
       svelte: ^5
       vue: ^3.5.0
     peerDependenciesMeta:
-      pixi.js:
-        optional: true
       react:
         optional: true
       react-dom:
@@ -5605,9 +5602,6 @@ packages:
   text-decoder@1.2.7:
     resolution: {integrity: sha512-vlLytXkeP4xvEq2otHeJfSQIRyWxo/oZGEbXrtEEF9Hnmrdly59sUbzZ/QgyWuLYHctCHxFF4tRQZNQ9k60ExQ==}
 
-  three@0.185.0:
-    resolution: {integrity: sha512-+yRrcRO2iZa8uzvNNl0d7cL4huhgKgBvVJ0njcTe8xFqZ6DMAFZdCKDP91SEAuj25bNAj7k1QQdf+srZywVK6w==}
-
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
 
@@ -5617,6 +5611,10 @@ packages:
   tinyclip@0.1.12:
     resolution: {integrity: sha512-Ae3OVUqifDw0wBriIBS7yVaW44Dp6eSHQcyq4Igc7eN2TJH/2YsicswaW+J/OuMvhpDPOKEgpAZCjkb4hpoyeA==}
     engines: {node: ^16.14.0 || >= 17.3.0}
+
+  tinyest@0.3.2:
+    resolution: {integrity: sha512-1wqSt97RLezWzeogLSVXHr+E3jpYO8jxyaK2AIdJeGoZZTCubwNxQ9IqU5gbQpJVcxlbPugPAsII+m9/gqpPSA==}
+    engines: {node: '>=12.20.0'}
 
   tinyexec@1.2.4:
     resolution: {integrity: sha512-SHf/r48b7vOrjve9PxJo3MN5v5yuyjHvdUcrQffT3WXMUfnGmHDVbC4k3sHJaJTgZCwpUplIaAo5ANtMyp3YHg==}
@@ -5667,6 +5665,9 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
+  tsover-runtime@0.0.7:
+    resolution: {integrity: sha512-FHHwMJzZbnP23+fU1PxXljy7j0RRRosL2r1/CRUNTqfW+l7m35JsUkM615x/cAzw4GqRdXPIl3axKMj9qzpZtQ==}
+
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -5681,6 +5682,14 @@ packages:
   typed-array-buffer@1.0.3:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
     engines: {node: '>= 0.4'}
+
+  typed-binary@4.3.3:
+    resolution: {integrity: sha512-W2hLsSzt3k/tg38gDE4Fn/QiwcoqGuUHBc2cb3mXuH7KcYxe/GM57vzW14s2/bawB4R5knGgGq8Xb57vsaJ4Sg==}
+
+  typegpu@0.11.9:
+    resolution: {integrity: sha512-AqBV6P9lW2jA7pEVDeiMD7Qoza9doPgueQbwyUyf09u4ndb9jOttHwpZ18c+BEzwLHaPlV50jw0hx5QsmVJGNg==}
+    engines: {node: '>=12.20.0'}
+    hasBin: true
 
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
@@ -12511,9 +12520,9 @@ snapshots:
       safe-buffer: 5.2.1
       to-buffer: 1.2.2
 
-  shaders@2.5.135(vue@3.5.35(typescript@6.0.3)):
+  shaders@3.0.444(vue@3.5.35(typescript@6.0.3)):
     dependencies:
-      three: 0.185.0
+      typegpu: 0.11.9
     optionalDependencies:
       vue: 3.5.35(typescript@6.0.3)
 
@@ -12759,13 +12768,13 @@ snapshots:
     transitivePeerDependencies:
       - react-native-b4a
 
-  three@0.185.0: {}
-
   tiny-inflate@1.0.3: {}
 
   tiny-invariant@1.3.3: {}
 
   tinyclip@0.1.12: {}
+
+  tinyest@0.3.2: {}
 
   tinyexec@1.2.4: {}
 
@@ -12807,6 +12816,8 @@ snapshots:
 
   tslib@2.8.1: {}
 
+  tsover-runtime@0.0.7: {}
+
   type-check@0.4.0:
     dependencies:
       prelude-ls: 1.2.1
@@ -12822,6 +12833,14 @@ snapshots:
       call-bound: 1.0.4
       es-errors: 1.3.0
       is-typed-array: 1.1.15
+
+  typed-binary@4.3.3: {}
+
+  typegpu@0.11.9:
+    dependencies:
+      tinyest: 0.3.2
+      tsover-runtime: 0.0.7
+      typed-binary: 4.3.3
 
   typescript@5.9.3: {}
 

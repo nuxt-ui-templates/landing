@@ -18,7 +18,7 @@
     "@vueuse/nuxt": "^14.3.0",
     "motion-v": "^2.3.0",
     "nuxt": "^4.4.8",
-    "shaders": "^2.5.135",
+    "shaders": "^3.0.444",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {

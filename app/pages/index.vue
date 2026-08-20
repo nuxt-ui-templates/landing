@@ -83,7 +83,7 @@ const { copy, copied } = useClipboard()
             color="neutral"
             variant="soft"
             :label="page.hero.headline"
-            class="rounded-full px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur"
+            class="rounded-full px-3 py-1.5 gap-1.5 bg-white/5 backdrop-blur-sm"
           >
             <template #leading>
               <UChip

@@ -28,14 +28,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2026-06-30',
 
-  nitro: {
-    prerender: {
-      routes: [
-        '/'
-      ]
-    }
-  },
-
   eslint: {
     config: {
       stylistic: {
@@ -43,5 +35,11 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  prerender: {
+    routes: [
+      '/'
+    ]
   }
 })

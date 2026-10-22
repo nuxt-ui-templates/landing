@@ -188,8 +188,8 @@ importers:
         specifier: ^4.6.2
         version: 4.6.2(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0(supports-color@10.2.2)))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.0(supports-color@10.2.2)))(@oxc-project/types@0.152.0)(@parcel/watcher@2.5.6)(@vue/compiler-sfc@3.5.44)(acorn@8.18.0)(confbox@0.3.1)(db0@0.3.4)(dotenv@17.4.2)(esbuild@0.28.0)(eslint@10.13.0(jiti@2.7.0)(supports-color@10.2.2))(giget@3.3.1)(ioredis@5.10.1(supports-color@10.2.2))(lightningcss@1.33.0)(mlly@1.8.2)(optionator@0.9.4)(oxc-parser@0.139.0)(rolldown@1.2.12)(rollup-plugin-visualizer@7.0.1(rolldown@1.2.12)(rollup@4.60.4))(rollup@4.60.4)(supports-color@10.2.2)(terser@5.47.1)(typescript@6.0.3)(vite@8.3.4(esbuild@0.28.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))(vue-tsc@3.3.13(typescript@6.0.3))(yaml@2.9.0)
       shaders:
-        specifier: ^3.2.475
-        version: 3.2.475(vue@3.5.44(typescript@6.0.3))
+        specifier: ^4.0.5
+        version: 4.0.5(vue@3.5.44(typescript@6.0.3))
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -5164,8 +5164,8 @@ packages:
     engines: {node: '>= 0.10'}
     hasBin: true
 
-  shaders@3.2.475:
-    resolution: {integrity: sha512-oq/HaYrt7HwOWq/k6nYOy+jsY4Cu/1K0QJeBB3h9872mVhient/qMtPxg4LgWPnc4QlIEDj3XBAB5SEV2OxT6g==}
+  shaders@4.0.5:
+    resolution: {integrity: sha512-1muVyMI5NGkv/+/QpHD9wY2HfmxeWq3MBDT3ERFBTStCSzikSBravuTaGv3B1nz0rXccvv3C0xp3lmvfptu3Zg==}
     hasBin: true
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
@@ -12147,7 +12147,7 @@ snapshots:
       safe-buffer: 5.2.1
       to-buffer: 1.2.2
 
-  shaders@3.2.475(vue@3.5.44(typescript@6.0.3)):
+  shaders@4.0.5(vue@3.5.44(typescript@6.0.3)):
     dependencies:
       typegpu: 0.12.3
     optionalDependencies:

@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import type { ButtonProps } from '@nuxt/ui'
+
 definePageMeta({
   colorMode: 'dark'
 })
 
-const { data: page } = await useAsyncData('index', () => queryCollection('content').first())
+// v4 infers the page type from `content/index.yml`, so link fields like `color` are typed as plain
+// strings (v3 narrowed them with the zod schema in `content.config.ts`): the links are cast to
+// `ButtonProps` where they're passed to `UButton`.
+const { data: page } = await useAsyncData('index', () => content.get('/').then(file => file?.data))
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
@@ -135,7 +140,7 @@ const { copy, copied } = useClipboard()
           <UButton
             v-for="link in page.hero.links"
             :key="link.label"
-            v-bind="link"
+            v-bind="(link as ButtonProps)"
           />
         </Motion>
       </template>
@@ -336,7 +341,7 @@ const { copy, copied } = useClipboard()
           <UButton
             v-for="link in page.cta.links"
             :key="link.label"
-            v-bind="link"
+            v-bind="(link as ButtonProps)"
             size="xl"
           />
 

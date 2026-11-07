@@ -15,15 +15,9 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   content: {
-    experimental: {
-      sqliteConnector: 'native'
-    }
-  },
-
-  mdc: {
-    highlight: {
-      noApiRoute: false
-    }
+    // The page only uses the native `content.get()` API, so the v3 compatibility layer
+    // (`queryCollection()`, `<MDC>`, ...) is turned off.
+    v3Composables: false
   },
 
   compatibilityDate: '2026-06-30',

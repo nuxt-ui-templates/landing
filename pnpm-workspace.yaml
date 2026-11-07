@@ -5,3 +5,7 @@ allowBuilds:
   esbuild: false
   unrs-resolver: false
   vue-demi: false
+minimumReleaseAgeExclude:
+  - '@comark/vue@0.9.0'
+  - comark-content@0.5.1
+  - comark@0.9.0

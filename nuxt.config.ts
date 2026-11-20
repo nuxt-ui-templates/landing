@@ -26,6 +26,16 @@ export default defineNuxtConfig({
     }
   },
 
+  ui: {
+    eslint: {
+      rules: {
+        'no-unknown-classes': 'error',
+        'no-conflicting-classes': 'error',
+        'no-palette-colors': 'error'
+      }
+    }
+  },
+
   compatibilityDate: '2026-06-30',
 
   eslint: {

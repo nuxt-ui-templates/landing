@@ -17,7 +17,7 @@
     "@nuxt/ui": "^4.13.0",
     "@vueuse/nuxt": "^14.4.0",
     "motion-v": "^2.13.0",
-    "nuxt": "^4.6.4",
+    "nuxt": "^4.7.0",
     "shaders": "^4.0.7",
     "tailwindcss": "^4.3.5"
   },
